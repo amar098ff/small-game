@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #09090f;
+  font-family: 'Outfit', sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+/* Header */
+header { text-align: center; }
+
+h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+
+.tagline {
+  color: #4b5563;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+  letter-spacing: 1px;
+}
+
+/* HUD */
+.hud {
+  display: flex;
+  gap: 1.5rem;
+  background: #111120;
+  border: 1px solid #1e1e40;
+  border-radius: 14px;
+  padding: 0.7rem 2rem;
+}
+
+.stat { text-align: center; }
+.stat .label { display: block; font-size: 0.65rem; color: #4b5563; text-transform: uppercase; letter-spacing: 1.5px; }
+.stat .value { font-size: 1.8rem; font-weight: 700; color: #a78bfa; line-height: 1.2; }
+.stat .value.danger { color: #f87171; animation: pulse-danger 0.5s infinite alternate; }
+.stat .misses-val { color: #fb923c; }
+
+@keyframes pulse-danger {
+  from { opacity: 1; }
+  to   { opacity: 0.5; }
+}
+
+/* Arena */
+.arena {
+  width: 360px;
+  height: 360px;
+  border-radius: 24px;
+  background: #111120;
+  border: 2px solid #1e1e40;
+  position: relative;
+  cursor: crosshair;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 60px #a78bfa18;
+}
+
+.arena.playing {
+  border-color: #a78bfa55;
+  box-shadow: 0 0 80px #a78bfa28;
+}
+
+/* Dot */
+.dot {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  position: absolute;
+  border: none;
+  background: radial-gradient(circle at 35% 35%, #c4b5fd, #7c3aed);
+  box-shadow: 0 0 24px #7c3aed99;
+  cursor: pointer;
+  animation: dot-in 0.15s cubic-bezier(.34,1.56,.64,1) forwards, glow 1s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes dot-in {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+@keyframes glow {
+  0%,100% { box-shadow: 0 0 24px #7c3aed99; }
+  50%      { box-shadow: 0 0 40px #a78bfacc; }
+}
+
+.dot:active { transform: scale(0.9); }
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.6;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.overlay.result { color: #e5e7eb; }
+.result-title { font-size: 1.5rem; font-weight: 700; color: #a78bfa; }
+.result strong { color: #60a5fa; }
+
+/* Particles */
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #a78bfa;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: burst 0.5s ease-out forwards;
+}
+
+.particle:nth-child(odd)  { background: #60a5fa; }
+.particle:nth-child(3n)   { background: #6ee7b7; }
+.particle:nth-child(4n)   { background: #fbbf24; }
+
+@keyframes burst {
+  0%   { opacity: 1; transform: translate(-50%,-50%) translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(-50%,-50%) translate(var(--tx),var(--ty)) scale(0.2); }
+}
+
+/* Feedback */
+.feedback {
+  min-height: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.speed { color: #6ee7b7; }
+.muted { color: #374151; }
+
+/* Start button */
+.start-btn {
+  padding: 0.75rem 2.5rem;
+  border-radius: 100px;
+  border: none;
+  background: linear-gradient(135deg, #7c3aed, #3b82f6);
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 4px 24px #7c3aed44;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.start-btn:hover { transform: scale(1.06); box-shadow: 0 6px 32px #7c3aed66; }
+.start-btn:active { transform: scale(0.97); }
+
+/* Best bar */
+.best-bar {
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.best-bar strong { color: #a78bfa; }
